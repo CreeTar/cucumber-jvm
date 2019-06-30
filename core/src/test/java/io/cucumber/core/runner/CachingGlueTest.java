@@ -55,6 +55,7 @@ public class CachingGlueTest {
         when(b.getLocation(true)).thenReturn("bar.bf:90");
         try {
             glue.addStepDefinition(typeRegistry -> b);
+            glue.applyStepDefinitions();
             fail("should have failed");
         } catch (DuplicateStepDefinitionException expected) {
             assertEquals("Duplicate step definitions in foo.bf:10 and bar.bf:90", expected.getMessage());
@@ -70,6 +71,7 @@ public class CachingGlueTest {
         StepDefinition sd = spy(new MockedScenarioScopedStepDefinition());
         when(sd.getPattern()).thenReturn("pattern");
         glue.addStepDefinition(typeRegistry -> sd);
+        glue.applyStepDefinitions();
 
         HookDefinition bh = spy(new MockedScenarioScopedHookDefinition());
         glue.addBeforeHook(bh);
@@ -92,6 +94,8 @@ public class CachingGlueTest {
     public void removes_scenario_scoped_cache_entries() {
         StepDefinition sd = new MockedScenarioScopedStepDefinition("pattern");
         glue.addStepDefinition(typeRegistry -> sd);
+        glue.applyStepDefinitions();
+
         String featurePath = "someFeature.feature";
 
         String stepText = "pattern";
@@ -109,6 +113,7 @@ public class CachingGlueTest {
     public void returns_null_if_no_matching_steps_found() {
         StepDefinition stepDefinition = spy(new MockedStepDefinition("pattern1"));
         glue.addStepDefinition(typeRegistry -> stepDefinition);
+        glue.applyStepDefinitions();
         String featurePath = "someFeature.feature";
 
         PickleStep pickleStep = getPickleStep("pattern");
@@ -122,6 +127,7 @@ public class CachingGlueTest {
         StepDefinition stepDefinition2 = spy(new MockedStepDefinition("^pattern2"));
         glue.addStepDefinition(typeRegistry -> stepDefinition1);
         glue.addStepDefinition(typeRegistry -> stepDefinition2);
+        glue.applyStepDefinitions();
         String featurePath = "someFeature.feature";
         String stepText = "pattern1";
 
@@ -149,6 +155,7 @@ public class CachingGlueTest {
         StepDefinition stepDefinition2 = spy(new MockedStepDefinition("^pattern2"));
         glue.addStepDefinition(typeRegistry -> stepDefinition1);
         glue.addStepDefinition(typeRegistry -> stepDefinition2);
+        glue.applyStepDefinitions();
         String featurePath = "someFeature.feature";
         String stepText = "pattern1";
 
@@ -188,6 +195,7 @@ public class CachingGlueTest {
         StepDefinition stepDefinition2 = spy(new MockedStepDefinition("^pattern2"));
         glue.addStepDefinition(typeRegistry -> stepDefinition1);
         glue.addStepDefinition(typeRegistry -> stepDefinition2);
+        glue.applyStepDefinitions();
         String featurePath = "someFeature.feature";
         String stepText = "pattern1";
 
@@ -238,6 +246,7 @@ public class CachingGlueTest {
         glue.addStepDefinition(typeRegistry -> stepDefinition1);
         glue.addStepDefinition(typeRegistry -> stepDefinition2);
         glue.addStepDefinition(typeRegistry -> stepDefinition3);
+        glue.applyStepDefinitions();
         String featurePath = "someFeature.feature";
 
         checkAmbiguousCalled(featurePath);
