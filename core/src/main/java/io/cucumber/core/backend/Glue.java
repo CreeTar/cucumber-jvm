@@ -1,6 +1,7 @@
 package io.cucumber.core.backend;
 
 import io.cucumber.core.stepexpression.TypeRegistry;
+import io.cucumber.datatable.DataTableType;
 import org.apiguardian.api.API;
 
 import java.util.function.Function;
@@ -19,5 +20,7 @@ public interface Glue {
     void addAfterStepHook(HookDefinition hookDefinition);
 
     void addParameterType(ParameterTypeDefinition parameterTypeDefinition);
+
+    void addDataTableType(DataTableTypeTypeDefinition dataTableTypeTypeDefinition);
 
 }
