@@ -27,6 +27,10 @@ class Scenario implements cucumber.api.Scenario {
     public void add(Result result) {
         stepResults.add(result);
     }
+    
+    public TestCase getTestCase() {
+        return testCase;
+    }
 
     @Override
     public Collection<String> getSourceTagNames() {
