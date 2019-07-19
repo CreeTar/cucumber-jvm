@@ -25,6 +25,10 @@ abstract class TestStep implements cucumber.api.TestStep {
     TestStep(StepDefinitionMatch stepDefinitionMatch) {
         this.stepDefinitionMatch = stepDefinitionMatch;
     }
+    
+    public StepDefinitionMatch getStepDefinitionMatch() {
+        return stepDefinitionMatch;
+    }
 
     @Override
     public String getCodeLocation() {
