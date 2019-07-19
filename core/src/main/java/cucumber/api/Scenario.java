@@ -20,6 +20,8 @@ public interface Scenario {
      * @return the <em>most severe</em> status of the Scenario's Steps.
      */
     Result.Type getStatus();
+    
+    TestCase getTestCase();
 
     /**
      * @return true if and only if {@link #getStatus()} returns "failed"
