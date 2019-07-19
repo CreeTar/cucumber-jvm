@@ -74,6 +74,11 @@ class JavaStepDefinition implements StepDefinition {
     public String getLocation(boolean detail) {
         return detail ? fullFormat : shortFormat;
     }
+    
+    @Override
+    public Method getMethod() {
+        return method;
+    }
 
     @Override
     public Integer getParameterCount() {
